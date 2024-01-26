@@ -18,7 +18,7 @@ package report
 
 const defaultTemplate = `
 %use square brackets as golang text templating delimiters
-\documentclass{article}
+\documentclass[a3paper]{article}
 \usepackage{graphicx}
 \usepackage[margin=1in]{geometry}
 
