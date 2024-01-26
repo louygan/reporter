@@ -9,20 +9,10 @@ RUN make build
 FROM alpine:3.12
 COPY util/texlive.profile /
 
-RUN PACKAGES="wget libswitch-perl" \
+RUN PACKAGES="wget freeswitch-perl" \
         && apk update \
         && apk add $PACKAGES \
-        && apk add ca-certificates \
-        && wget -qO- \
-          "https://github.com/yihui/tinytex/raw/master/tools/install-unx.sh" | \
-          sh -s - --admin --no-path \
-        && mv ~/.TinyTeX /opt/TinyTeX \
-        && /opt/TinyTeX/bin/*/tlmgr path add \
-        && tlmgr path add \
-        && chown -R root:adm /opt/TinyTeX \
-        && chmod -R g+w /opt/TinyTeX \
-        && chmod -R g+wx /opt/TinyTeX/bin \
-        && tlmgr install epstopdf-pkg \
+        && apk add ca-certificates texlive \
         # Cleanup
         && apk del --purge -qq $PACKAGES \
         && apk del --purge -qq \
